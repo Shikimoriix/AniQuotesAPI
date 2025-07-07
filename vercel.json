@@ -1,6 +1,10 @@
 {
   "rewrites": [
-    { "source": "/", "destination": "/api/home.js" },
+    { "source": "/", "destination": "/public/index.html" },
+    { "source": "/docs", "destination": "/public/docs.html" },
+    { "source": "/api-reference", "destination": "/public/api-reference.html" },
+    { "source": "/examples", "destination": "/public/examples.html" },
+    { "source": "/contribute", "destination": "/public/contribute.html" },
     { "source": "/status", "destination": "/api/status.js" },
     { "source": "/v1/(.*)", "destination": "/api/v1/$1" },
     { "source": "/v2/(.*)", "destination": "/api/v2/$1" }
@@ -22,6 +26,12 @@
       "source": "/v2/image",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=86400" }
+      ]
+    },
+    {
+      "source": "/public/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
       ]
     }
   ],
