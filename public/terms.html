@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions - AniQuotes API Wiki</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/Shineii86/AniQuotesAPI/main/assets/LogoHD.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF5E8A;
+            --primary-dark: #E0446C;
+            --secondary: #FF7BAC;
+            --accent: #00D4FF;
+            --accent-dark: #0088CC;
+            --background: #FFFFFF;
+            --surface: #FAFAFA;
+            --surface-elevated: #FFFFFF;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+            --text-tertiary: #999999;
+            --border: #E5E5E5;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --gradient-primary: linear-gradient(135deg, #FF5E8A 0%, #FF7BAC 100%);
+            --gradient-accent: linear-gradient(135deg, #00D4FF 0%, #0088CC 100%);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        [data-theme="dark"] {
+            --primary: #FF5E8A;
+            --primary-dark: #E0446C;
+            --secondary: #FF7BAC;
+            --accent: #00D4FF;
+            --accent-dark: #0088CC;
+            --background: #0F0F0F;
+            --surface: #1A1A1A;
+            --surface-elevated: #262626;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B3B3B3;
+            --text-tertiary: #808080;
+            --border: #333333;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --shadow: 0 4px 6px -1px rgba(255, 94, 138, 0.1), 0 2px 4px -1px rgba(255, 94, 138, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(255, 94, 138, 0.1), 0 10px 10px -5px rgba(255, 94, 138, 0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--background);
+            transition: all 0.3s ease;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .navbar {
+            background: rgba(15, 15, 15, 0.95);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .nav-logo i {
+            color: var(--primary);
+            font-size: 1.75rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+            background: rgba(255, 94, 138, 0.1);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            cursor: pointer;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* Header */
+        .page-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 120px 0 60px;
+            text-align: center;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .last-updated {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 1rem;
+        }
+
+        .content-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .section-title i {
+            color: var(--primary);
+        }
+
+        .subsection-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            color: var(--text-primary);
+        }
+
+        .content-text {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-text strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Lists */
+        .content-list {
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .content-list li {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            line-height: 1.7;
+        }
+
+        /* Alert Boxes */
+        .alert-box {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 4px solid;
+        }
+
+        .alert-box.warning {
+            border-left-color: var(--warning);
+            background: rgba(245, 158, 11, 0.1);
+        }
+
+        .alert-box.error {
+            border-left-color: var(--error);
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .alert-box.info {
+            border-left-color: var(--accent);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .alert-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .alert-title i {
+            font-size: 1.1rem;
+        }
+
+        .alert-box.warning .alert-title i {
+            color: var(--warning);
+        }
+
+        .alert-box.error .alert-title i {
+            color: var(--error);
+        }
+
+        .alert-box.info .alert-title i {
+            color: var(--accent);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--surface);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-text a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-btn {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <i class="fas fa-quote-left"></i>
+                AniQuotes Wiki
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/docs" class="nav-link">Documentation</a></li>
+                <li><a href="/api-reference" class="nav-link">API Reference</a></li>
+                <li><a href="/examples" class="nav-link">Examples</a></li>
+                <li><a href="/contribute" class="nav-link">Contribute</a></li>
+            </ul>
+
+            <div class="nav-controls">
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="page-header">
+        <div class="header-container">
+            <h1 class="page-title">Terms & Conditions</h1>
+            <p class="page-subtitle">
+                Please read these terms carefully before using AniQuotes API. By accessing our service, you agree to be bound by these terms.
+            </p>
+            <div class="last-updated">
+                <i class="fas fa-calendar-alt"></i>
+                Last Updated: July 06, 2025
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Acceptance of Terms -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-handshake"></i>
+                Acceptance of Terms
+            </h2>
+            <p class="content-text">
+                By accessing or using the AniQuotes API ("Service"), you agree to be bound by these Terms and Conditions ("Terms"). If you do not agree to all of these Terms, do not access or use the Service.
+            </p>
+            
+            <div class="alert-box warning">
+                <div class="alert-title">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Age Requirement
+                </div>
+                <p class="content-text">
+                    You must be at least <strong>13 years old</strong> to use this Service. By using the Service, you represent that you are at least 13 years of age.
+                </p>
+            </div>
+        </section>
+
+        <!-- Description of Service -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-server"></i>
+                Description of Service
+            </h2>
+            <p class="content-text">
+                The AniQuotes API is a free RESTful service that provides:
+            </p>
+            <ul class="content-list">
+                <li>Access to a curated collection of anime quotes</li>
+                <li>Multi-language support for quotes</li>
+                <li>Quote image generation capabilities</li>
+                <li>Random quote functionality</li>
+            </ul>
+        </section>
+
+        <!-- API License -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-certificate"></i>
+                API License
+            </h2>
+            <p class="content-text">
+                We grant you a limited, non-exclusive, non-transferable, revocable license to:
+            </p>
+            <ul class="content-list">
+                <li>Access and use the Service</li>
+                <li>Integrate the API into your applications</li>
+                <li>Display API responses to end users</li>
+            </ul>
+        </section>
+
+        <!-- Attribution Requirement -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-tag"></i>
+                Attribution Requirement
+            </h2>
+            <p class="content-text">
+                When using the Service, you must:
+            </p>
+            <ul class="content-list">
+                <li>Display the credit "GitHub/Shineii86" prominently in your application</li>
+                <li>Include the credit in any output or display of API data</li>
+                <li>Not remove or obscure the credit information</li>
+            </ul>
+            
+            <div class="alert-box info">
+                <div class="alert-title">
+                    <i class="fas fa-info-circle"></i>
+                    Attribution Example
+                </div>
+                <p class="content-text">
+                    A proper attribution could be: "Quotes powered by AniQuotes API - GitHub/Shineii86"
+                </p>
+            </div>
+        </section>
+
+        <!-- Usage Limitations -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-tachometer-alt"></i>
+                Usage Limitations
+            </h2>
+            <p class="content-text">
+                You agree to:
+            </p>
+            <ul class="content-list">
+                <li>Not exceed <strong>100 requests per minute</strong></li>
+                <li>Not use the Service for commercial purposes without prior authorization</li>
+                <li>Not attempt to reverse engineer, decompile, or disassemble the API</li>
+                <li>Not use the Service in violation of any laws or regulations</li>
+            </ul>
+        </section>
+
+        <!-- Prohibited Uses -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-ban"></i>
+                Prohibited Uses
+            </h2>
+            <p class="content-text">
+                You may not use the Service to:
+            </p>
+            <ul class="content-list">
+                <li>Create content that is illegal, harmful, or offensive</li>
+                <li>Generate spam or unsolicited content</li>
+                <li>Violate intellectual property rights</li>
+                <li>Impersonate any person or entity</li>
+                <li>Interfere with or disrupt the Service</li>
+            </ul>
+        </section>
+
+        <!-- Intellectual Property -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-copyright"></i>
+                Intellectual Property
+            </h2>
+            <ul class="content-list">
+                <li>All anime quotes belong to their respective copyright holders</li>
+                <li>The API structure and implementation are © 2025 GitHub/Shineii86</li>
+                <li>You retain ownership of applications you build using the API</li>
+            </ul>
+        </section>
+
+        <!-- User Contributions -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-users"></i>
+                User Contributions
+            </h2>
+            <p class="content-text">
+                By submitting quotes to the Service:
+            </p>
+            <ul class="content-list">
+                <li>You warrant you have the right to share the content</li>
+                <li>You grant us a perpetual license to use and distribute the content</li>
+                <li>You agree quotes will be shared under MIT License</li>
+            </ul>
+        </section>
+
+        <!-- Disclaimer -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-exclamation-circle"></i>
+                Disclaimer of Warranties
+            </h2>
+            
+            <div class="alert-box error">
+                <div class="alert-title">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Important Disclaimer
+                </div>
+                <p class="content-text">
+                    THE SERVICE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND. WE DISCLAIM ALL WARRANTIES, WHETHER EXPRESS, IMPLIED, OR STATUTORY, INCLUDING WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+                </p>
+            </div>
+            
+            <p class="content-text">
+                We do not guarantee:
+            </p>
+            <ul class="content-list">
+                <li>100% uptime or availability of the Service</li>
+                <li>Accuracy or completeness of the quotes</li>
+                <li>Continued support for specific API versions</li>
+            </ul>
+        </section>
+
+        <!-- Limitation of Liability -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-shield-alt"></i>
+                Limitation of Liability
+            </h2>
+            
+            <div class="alert-box error">
+                <div class="alert-title">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Liability Limitation
+                </div>
+                <p class="content-text">
+                    IN NO EVENT SHALL WE BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING FROM YOUR USE OF THE SERVICE.
+                </p>
+            </div>
+        </section>
+
+        <!-- Termination -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-times-circle"></i>
+                Termination
+            </h2>
+            <p class="content-text">
+                We may terminate or suspend your access to the Service:
+            </p>
+            <ul class="content-list">
+                <li>Immediately, for violations of these Terms</li>
+                <li>With 30 days notice for operational reasons</li>
+                <li>At our sole discretion, without liability</li>
+            </ul>
+        </section>
+
+        <!-- Modifications -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-edit"></i>
+                Modifications
+            </h2>
+            <p class="content-text">
+                We reserve the right to:
+            </p>
+            <ul class="content-list">
+                <li>Modify these Terms at any time</li>
+                <li>Change or discontinue the Service</li>
+                <li>Update API endpoints without prior notice</li>
+            </ul>
+        </section>
+
+        <!-- Governing Law -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-gavel"></i>
+                Governing Law
+            </h2>
+            <p class="content-text">
+                These Terms shall be governed by the laws of the <strong>United Kingdom</strong>, without regard to its conflict of law provisions.
+            </p>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <h2 class="section-title">
+                <i class="fas fa-envelope"></i>
+                Contact Information
+            </h2>
+            <p class="content-text">
+                For questions about these Terms, contact us via:
+            </p>
+            <div class="contact-links">
+                <a href="mailto:aniquotesapi@gmail.com" class="contact-btn">
+                    <i class="fas fa-envelope"></i>
+                    Email Us
+                </a>
+                <a href="https://github.com/Shineii86/AniQuotesAPI/issues" target="_blank" class="contact-btn">
+                    <i class="fab fa-github"></i>
+                    GitHub Issues
+                </a>
+                <a href="https://telegram.me/Shineii86" target="_blank" class="contact-btn">
+                    <i class="fab fa-telegram"></i>
+                    Telegram
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p class="footer-text">
+                Built with ❤️ by <a href="https://telegram.me/Shineii86">Shinei Nouzen</a>
+            </p>
+            <p class="footer-text">
+                © 2025 AniQuotes API. Open source and free forever.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            const icon = document.getElementById('theme-icon');
+            icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.getElementById('theme-icon').className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    </script>
+</body>
+</html>

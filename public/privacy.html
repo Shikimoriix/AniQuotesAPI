@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - AniQuotes API Wiki</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/Shineii86/AniQuotesAPI/main/assets/LogoHD.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF5E8A;
+            --primary-dark: #E0446C;
+            --secondary: #FF7BAC;
+            --accent: #00D4FF;
+            --accent-dark: #0088CC;
+            --background: #FFFFFF;
+            --surface: #FAFAFA;
+            --surface-elevated: #FFFFFF;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+            --text-tertiary: #999999;
+            --border: #E5E5E5;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --gradient-primary: linear-gradient(135deg, #FF5E8A 0%, #FF7BAC 100%);
+            --gradient-accent: linear-gradient(135deg, #00D4FF 0%, #0088CC 100%);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        [data-theme="dark"] {
+            --primary: #FF5E8A;
+            --primary-dark: #E0446C;
+            --secondary: #FF7BAC;
+            --accent: #00D4FF;
+            --accent-dark: #0088CC;
+            --background: #0F0F0F;
+            --surface: #1A1A1A;
+            --surface-elevated: #262626;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B3B3B3;
+            --text-tertiary: #808080;
+            --border: #333333;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --shadow: 0 4px 6px -1px rgba(255, 94, 138, 0.1), 0 2px 4px -1px rgba(255, 94, 138, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(255, 94, 138, 0.1), 0 10px 10px -5px rgba(255, 94, 138, 0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--background);
+            transition: all 0.3s ease;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .navbar {
+            background: rgba(15, 15, 15, 0.95);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .nav-logo i {
+            color: var(--primary);
+            font-size: 1.75rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+            background: rgba(255, 94, 138, 0.1);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            cursor: pointer;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* Header */
+        .page-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 120px 0 60px;
+            text-align: center;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .last-updated {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 1rem;
+        }
+
+        .content-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .section-title i {
+            color: var(--primary);
+        }
+
+        .subsection-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            color: var(--text-primary);
+        }
+
+        .content-text {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-text strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Lists */
+        .content-list {
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .content-list li {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            line-height: 1.7;
+        }
+
+        /* Info Cards */
+        .info-card {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 4px solid var(--primary);
+        }
+
+        .info-card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-card-title i {
+            color: var(--primary);
+        }
+
+        /* Table */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: var(--surface-elevated);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .info-table th {
+            background: var(--surface);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .info-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .info-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--surface);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-text a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-btn {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <i class="fas fa-quote-left"></i>
+                AniQuotes Wiki
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/docs" class="nav-link">Documentation</a></li>
+                <li><a href="/api-reference" class="nav-link">API Reference</a></li>
+                <li><a href="/examples" class="nav-link">Examples</a></li>
+                <li><a href="/contribute" class="nav-link">Contribute</a></li>
+            </ul>
+
+            <div class="nav-controls">
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="page-header">
+        <div class="header-container">
+            <h1 class="page-title">Privacy Policy</h1>
+            <p class="page-subtitle">
+                Your privacy matters to us. Learn how we collect, use, and protect your information when using AniQuotes API.
+            </p>
+            <div class="last-updated">
+                <i class="fas fa-calendar-alt"></i>
+                Last Updated: July 06, 2025
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Introduction -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-shield-alt"></i>
+                Introduction
+            </h2>
+            <p class="content-text">
+                Welcome to AniQuotes ("we", "our", or "us"). We are committed to protecting your privacy and handling your data in an open and transparent manner. This Privacy Policy explains how we collect, use, and disclose information when you use our API services.
+            </p>
+            <div class="info-card">
+                <div class="info-card-title">
+                    <i class="fas fa-info-circle"></i>
+                    Important Notice
+                </div>
+                <p class="content-text">
+                    <strong>By using the AniQuotes API, you agree to the collection and use of information in accordance with this policy.</strong>
+                </p>
+            </div>
+        </section>
+
+        <!-- Information We Collect -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-database"></i>
+                Information We Collect
+            </h2>
+            
+            <h3 class="subsection-title">Minimal Data Collection</h3>
+            <p class="content-text">
+                We collect minimal information necessary to operate our API services effectively:
+            </p>
+            
+            <div class="info-card">
+                <div class="info-card-title">
+                    <i class="fas fa-server"></i>
+                    API Request Data
+                </div>
+                <p class="content-text">We log API request metadata including:</p>
+                <ul class="content-list">
+                    <li>Timestamp of request</li>
+                    <li>Requested endpoint</li>
+                    <li>HTTP status code</li>
+                    <li>Response size</li>
+                    <li>User agent (browser/device information)</li>
+                    <li>IP address (anonymized)</li>
+                </ul>
+            </div>
+
+            <h3 class="subsection-title">What We Do NOT Collect</h3>
+            <p class="content-text">We do <strong>not</strong> collect:</p>
+            <ul class="content-list">
+                <li>Personal identification information (names, emails, addresses)</li>
+                <li>Payment information</li>
+                <li>Sensitive personal data</li>
+                <li>Content of API requests beyond metadata</li>
+                <li>User browsing history outside our API</li>
+            </ul>
+        </section>
+
+        <!-- How We Use Information -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-cogs"></i>
+                How We Use Your Information
+            </h2>
+            <p class="content-text">
+                We use collected information for the following purposes:
+            </p>
+
+            <table class="info-table">
+                <thead>
+                    <tr>
+                        <th>Purpose</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Service Operation</strong></td>
+                        <td>To provide, maintain, and improve our API services</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Performance Monitoring</strong></td>
+                        <td>To monitor API performance and stability</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Security</strong></td>
+                        <td>To detect, prevent, and address security issues</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Abuse Prevention</strong></td>
+                        <td>To identify and prevent API abuse and fraudulent activities</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Analytics</strong></td>
+                        <td>To understand usage patterns and improve our services</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Legal Compliance</strong></td>
+                        <td>To comply with legal obligations</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Data Storage and Retention -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-clock"></i>
+                Data Storage and Retention
+            </h2>
+            <ul class="content-list">
+                <li><strong>Log Data:</strong> We retain API request logs for <strong>30 days</strong> for operational and security purposes.</li>
+                <li><strong>Anonymization:</strong> IP addresses are anonymized after 7 days by removing the last octet (e.g., 192.168.1.XXX).</li>
+                <li><strong>Aggregate Data:</strong> We retain aggregate, non-identifiable usage statistics indefinitely for analytical purposes.</li>
+            </ul>
+        </section>
+
+        <!-- Security Measures -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-lock"></i>
+                Security Measures
+            </h2>
+            <p class="content-text">
+                We implement appropriate technical and organizational measures to protect your information:
+            </p>
+            <ul class="content-list">
+                <li>Encryption of data in transit using TLS 1.2+</li>
+                <li>Regular security audits and vulnerability scanning</li>
+                <li>Access controls and authentication mechanisms</li>
+                <li>Rate limiting to prevent abuse</li>
+                <li>Regular software updates and security patches</li>
+            </ul>
+        </section>
+
+        <!-- Your Rights -->
+        <section class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-user-shield"></i>
+                Your Rights
+            </h2>
+            <p class="content-text">
+                Depending on your jurisdiction, you may have certain rights regarding your information:
+            </p>
+            <ul class="content-list">
+                <li>Right to access information we hold about you</li>
+                <li>Right to rectification of inaccurate information</li>
+                <li>Right to erasure of your data</li>
+                <li>Right to restrict processing of your data</li>
+                <li>Right to data portability</li>
+                <li>Right to object to processing</li>
+            </ul>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <h2 class="section-title">
+                <i class="fas fa-envelope"></i>
+                Contact Us
+            </h2>
+            <p class="content-text">
+                If you have any questions about this Privacy Policy or want to exercise your rights, please contact us:
+            </p>
+            <div class="contact-links">
+                <a href="mailto:aniquotesapi@gmail.com" class="contact-btn">
+                    <i class="fas fa-envelope"></i>
+                    Email Us
+                </a>
+                <a href="https://github.com/Shineii86/AniQuotesAPI/issues" target="_blank" class="contact-btn">
+                    <i class="fab fa-github"></i>
+                    GitHub Issues
+                </a>
+                <a href="https://telegram.me/Shineii86" target="_blank" class="contact-btn">
+                    <i class="fab fa-telegram"></i>
+                    Telegram
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p class="footer-text">
+                Built with ❤️ by <a href="https://telegram.me/Shineii86">Shinei Nouzen</a>
+            </p>
+            <p class="footer-text">
+                © 2025 AniQuotes API. Open source and free forever.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            const icon = document.getElementById('theme-icon');
+            icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.getElementById('theme-icon').className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    </script>
+</body>
+</html>

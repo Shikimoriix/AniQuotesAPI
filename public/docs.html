@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - AniQuotes API Wiki</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/Shineii86/AniQuotesAPI/main/assets/LogoHD.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Zero Two Color Palette - Light Theme */
+            --primary: #FF5E8A;
+            --primary-dark: #E0446C;
+            --secondary: #FF7BAC;
+            --accent: #00D4FF;
+            --accent-dark: #0088CC;
+            --background: #FFFFFF;
+            --surface: #FAFAFA;
+            --surface-elevated: #FFFFFF;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+            --text-tertiary: #999999;
+            --border: #E5E5E5;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --gradient-primary: linear-gradient(135deg, #FF5E8A 0%, #FF7BAC 100%);
+            --gradient-accent: linear-gradient(135deg, #00D4FF 0%, #0088CC 100%);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        [data-theme="dark"] {
+            /* Zero Two Color Palette - Dark Theme */
+            --primary: #FF5E8A;
+            --primary-dark: #E0446C;
+            --secondary: #FF7BAC;
+            --accent: #00D4FF;
+            --accent-dark: #0088CC;
+            --background: #0F0F0F;
+            --surface: #1A1A1A;
+            --surface-elevated: #262626;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B3B3B3;
+            --text-tertiary: #808080;
+            --border: #333333;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --shadow: 0 4px 6px -1px rgba(255, 94, 138, 0.1), 0 2px 4px -1px rgba(255, 94, 138, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(255, 94, 138, 0.1), 0 10px 10px -5px rgba(255, 94, 138, 0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--background);
+            transition: all 0.3s ease;
+        }
+
+        /* Navigation - Same as index */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .navbar {
+            background: rgba(15, 15, 15, 0.95);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .nav-logo i {
+            color: var(--primary);
+            font-size: 1.75rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+            background: rgba(255, 94, 138, 0.1);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            cursor: pointer;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* Layout */
+        .layout {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 70px;
+            gap: 2rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            padding: 2rem 1rem;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            min-height: calc(100vh - 70px);
+            position: sticky;
+            top: 70px;
+            overflow-y: auto;
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-section-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.75rem;
+        }
+
+        .sidebar-link {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .sidebar-link:hover,
+        .sidebar-link.active {
+            color: var(--primary);
+            background: rgba(255, 94, 138, 0.1);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            max-width: calc(100% - 280px);
+        }
+
+        .page-header {
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            line-height: 1.7;
+        }
+
+        /* Content Sections */
+        .content-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: var(--primary);
+        }
+
+        .subsection-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            color: var(--text-primary);
+        }
+
+        .content-text {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .code-title {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .copy-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.4rem;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .code-content {
+            padding: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+
+        /* Response Example */
+        .response-example {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .response-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .response-json {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--background);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+            overflow-x: auto;
+            font-size: 0.9rem;
+        }
+
+        /* Parameter Table */
+        .param-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: var(--surface-elevated);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .param-table th {
+            background: var(--surface);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .param-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .param-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .param-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .param-required {
+            background: var(--error);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .param-optional {
+            background: var(--warning);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid;
+        }
+
+        .info-box.tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-left-color: var(--success);
+        }
+
+        .info-box.warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-left-color: var(--warning);
+        }
+
+        .info-box.error {
+            background: rgba(239, 68, 68, 0.1);
+            border-left-color: var(--error);
+        }
+
+        .info-box.info {
+            background: rgba(0, 212, 255, 0.1);
+            border-left-color: var(--accent);
+        }
+
+        .info-box-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-text a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .layout {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                position: relative;
+                top: 0;
+                min-height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .main-content {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .param-table {
+                font-size: 0.8rem;
+            }
+
+            .param-table th,
+            .param-table td {
+                padding: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <i class="fas fa-quote-left"></i>
+                AniQuotes Wiki
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/docs" class="nav-link active">Documentation</a></li>
+                <li><a href="/api-reference" class="nav-link">API Reference</a></li>
+                <li><a href="/examples" class="nav-link">Examples</a></li>
+                <li><a href="/contribute" class="nav-link">Contribute</a></li>
+                <li><a href="/status" class="nav-link">Status</a></li>
+            </ul>
+
+            <div class="nav-controls">
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-title">
+                <i class="fas fa-book"></i>
+                Documentation
+            </div>
+            
+            <ul class="sidebar-nav">
+                <li class="sidebar-section">
+                    <div class="sidebar-section-title">Getting Started</div>
+                    <a href="#introduction" class="sidebar-link active">Introduction</a>
+                    <a href="#authentication" class="sidebar-link">Authentication</a>
+                    <a href="#rate-limiting" class="sidebar-link">Rate Limiting</a>
+                    <a href="#quick-start" class="sidebar-link">Quick Start</a>
+                </li>
+                
+                <li class="sidebar-section">
+                    <div class="sidebar-section-title">API Endpoints</div>
+                    <a href="#endpoints-v1" class="sidebar-link">Version 1 (V1)</a>
+                    <a href="#endpoints-v2" class="sidebar-link">Version 2 (V2)</a>
+                    <a href="#image-generation" class="sidebar-link">Image Generation</a>
+                </li>
+                
+                <li class="sidebar-section">
+                    <div class="sidebar-section-title">Advanced</div>
+                    <a href="#error-handling" class="sidebar-link">Error Handling</a>
+                    <a href="#response-format" class="sidebar-link">Response Format</a>
+                    <a href="#languages" class="sidebar-link">Supported Languages</a>
+                </li>
+                
+                <li class="sidebar-section">
+                    <div class="sidebar-section-title">Resources</div>
+                    <a href="#sdks" class="sidebar-link">SDKs & Libraries</a>
+                    <a href="#deployment" class="sidebar-link">Self-Hosting</a>
+                    <a href="#contributing" class="sidebar-link">Contributing</a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1 class="page-title">Documentation</h1>
+                <p class="page-description">
+                    Welcome to the AniQuotes API documentation! This comprehensive guide will help you integrate beautiful anime quotes into your applications. From basic usage to advanced features, everything you need is here.
+                </p>
+            </div>
+
+            <!-- Introduction -->
+            <section class="content-section" id="introduction">
+                <h2 class="section-title">
+                    <i class="fas fa-star"></i>
+                    Introduction
+                </h2>
+                <p class="content-text">
+                    AniQuotes API is a free, multilingual anime quotes service that provides instant access to thousands of curated quotes from your favorite anime series. With support for multiple languages and beautiful image generation, it's perfect for bots, websites, and mobile applications.
+                </p>
+                
+                <h3 class="subsection-title">Key Features</h3>
+                <ul style="color: var(--text-secondary); line-height: 2; margin-left: 1.5rem;">
+                    <li>🔀 <strong>Random & Searchable Quotes:</strong> Get random quotes or search by anime/character</li>
+                    <li>🌍 <strong>Multilingual Support:</strong> English, Japanese, Hindi, and more languages</li>
+                    <li>🖼️ <strong>Image Generation:</strong> Create beautiful quote cards with anime styling</li>
+                    <li>⚡ <strong>Lightning Fast:</strong> Deployed on Vercel's edge network for global speed</li>
+                    <li>💎 <strong>No Authentication:</strong> Start using immediately without API keys</li>
+                    <li>📱 <strong>Developer Friendly:</strong> Clean REST API with comprehensive documentation</li>
+                </ul>
+
+                <div class="info-box tip">
+                    <div class="info-box-title">
+                        <i class="fas fa-lightbulb"></i>
+                        Pro Tip
+                    </div>
+                    <p>The API is completely free and doesn't require authentication. You can start making requests immediately!</p>
+                </div>
+            </section>
+
+            <!-- Authentication -->
+            <section class="content-section" id="authentication">
+                <h2 class="section-title">
+                    <i class="fas fa-key"></i>
+                    Authentication
+                </h2>
+                <p class="content-text">
+                    AniQuotes API is completely free and open to use. <strong>No authentication, API keys, or registration is required.</strong> You can start making requests immediately to any endpoint.
+                </p>
+
+                <div class="info-box info">
+                    <div class="info-box-title">
+                        <i class="fas fa-info-circle"></i>
+                        No Authentication Required
+                    </div>
+                    <p>Simply make HTTP requests to our endpoints. Perfect for prototyping, learning, and production use!</p>
+                </div>
+            </section>
+
+            <!-- Rate Limiting -->
+            <section class="content-section" id="rate-limiting">
+                <h2 class="section-title">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Rate Limiting
+                </h2>
+                <p class="content-text">
+                    To ensure fair usage for all developers, we implement reasonable rate limits. Current limits are generous and suitable for most applications:
+                </p>
+
+                <table class="param-table">
+                    <thead>
+                        <tr>
+                            <th>Endpoint Type</th>
+                            <th>Rate Limit</th>
+                            <th>Reset Period</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Text Endpoints (V1, V2)</td>
+                            <td>1000 requests</td>
+                            <td>Per hour</td>
+                        </tr>
+                        <tr>
+                            <td>Image Generation</td>
+                            <td>200 requests</td>
+                            <td>Per hour</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="info-box warning">
+                    <div class="info-box-title">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Rate Limit Exceeded
+                    </div>
+                    <p>If you exceed the rate limit, you'll receive a <code>429 Too Many Requests</code> response. The limit resets every hour.</p>
+                </div>
+            </section>
+
+            <!-- Quick Start -->
+            <section class="content-section" id="quick-start">
+                <h2 class="section-title">
+                    <i class="fas fa-rocket"></i>
+                    Quick Start
+                </h2>
+                <p class="content-text">
+                    Get started with AniQuotes API in seconds. Here are some basic examples to help you begin:
+                </p>
+
+                <h3 class="subsection-title">1. Get a Random Quote</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">HTTP Request</span>
+                        <button class="copy-btn" onclick="copyCode('random-request')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                    <div class="code-content" id="random-request">GET https://aniquotesapi.vercel.app/v1/random</div>
+                </div>
+
+                <div class="response-example">
+                    <div class="response-title">
+                        <i class="fas fa-terminal"></i>
+                        Response Example
+                    </div>
+                    <div class="response-json">{
+  "id": 42,
+  "quote": "Believe in the me that believes in you!",
+  "anime": "Gurren Lagann",
+  "character": "Kamina",
+  "language": "en",
+  "credit": "GitHub/Shineii86"
+}</div>
+                </div>
+
+                <h3 class="subsection-title">2. Search by Anime</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">HTTP Request</span>
+                        <button class="copy-btn" onclick="copyCode('anime-request')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                    <div class="code-content" id="anime-request">GET https://aniquotesapi.vercel.app/v1/anime?name=Naruto</div>
+                </div>
+
+                <h3 class="subsection-title">3. Generate Quote Image</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">HTTP Request</span>
+                        <button class="copy-btn" onclick="copyCode('image-request')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                    <div class="code-content" id="image-request">GET https://aniquotesapi.vercel.app/v2/image?id=42&lang=en</div>
+                </div>
+
+                <div class="info-box tip">
+                    <div class="info-box-title">
+                        <i class="fas fa-code"></i>
+                        Ready to Code?
+                    </div>
+                    <p>Check out our <a href="/examples" style="color: var(--primary); text-decoration: none;">Examples page</a> for code samples in different programming languages!</p>
+                </div>
+            </section>
+
+            <!-- V1 Endpoints -->
+            <section class="content-section" id="endpoints-v1">
+                <h2 class="section-title">
+                    <i class="fas fa-code"></i>
+                    Version 1 (V1) Endpoints
+                </h2>
+                <p class="content-text">
+                    Version 1 endpoints provide basic quote retrieval functionality with simple, clean responses.
+                </p>
+
+                <h3 class="subsection-title">Random Quote</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">GET /v1/random</span>
+                        <button class="copy-btn" onclick="copyCode('v1-random')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                    <div class="code-content" id="v1-random">GET https://aniquotesapi.vercel.app/v1/random</div>
+                </div>
+                <p class="content-text">Returns a random anime quote from our collection.</p>
+
+                <h3 class="subsection-title">Quotes by Anime</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">GET /v1/anime</span>
+                        <button class="copy-btn" onclick="copyCode('v1-anime')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                    <div class="code-content" id="v1-anime">GET https://aniquotesapi.vercel.app/v1/anime?name=Naruto</div>
+                </div>
+
+                <table class="param-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="param-name">name</span></td>
+                            <td>string</td>
+                            <td><span class="param-required">Required</span></td>
+                            <td>Name of the anime series</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 class="subsection-title">Quotes by Character</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">GET /v1/character</span>
+                        <button class="copy-btn" onclick="copyCode('v1-character')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                    <div class="code-content" id="v1-character">GET https://aniquotesapi.vercel.app/v1/character?name=Naruto</div>
+                </div>
+
+                <table class="param-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="param-name">name</span></td>
+                            <td>string</td>
+                            <td><span class="param-required">Required</span></td>
+                            <td>Name of the character</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- V2 Endpoints -->
+            <section class="content-section" id="endpoints-v2">
+                <h2 class="section-title">
+                    <i class="fas fa-globe"></i>
+                    Version 2 (V2) Endpoints
+                </h2>
+                <p class="content-text">
+                    Version 2 introduces advanced features including multilingual support and powerful filtering options.
+                </p>
+
+                <h3 class="subsection-title">Multilingual Quotes</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">GET /v2/languages</span>
+                        <button class="copy-btn" onclick="copyCode('v2-languages')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                    <div class="code-content" id="v2-languages">GET https://aniquotesapi.vercel.app/v2/languages?lang=jp&anime=Naruto</div>
+                </div>
+
+                <table class="param-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="param-name">lang</span></td>
+                            <td>string</td>
+                            <td><span class="param-required">Required</span></td>
+                            <td>Language code (en, jp, hi, etc.)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="param-name">anime</span></td>
+                            <td>string</td>
+                            <td><span class="param-optional">Optional</span></td>
+                            <td>Filter by anime name</td>
+                        </tr>
+                        <tr>
+                            <td><span class="param-name">character</span></td>
+                            <td>string</td>
+                            <td><span class="param-optional">Optional</span></td>
+                            <td>Filter by character name</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Image Generation -->
+            <section class="content-section" id="image-generation">
+                <h2 class="section-title">
+                    <i class="fas fa-image"></i>
+                    Image Generation
+                </h2>
+                <p class="content-text">
+                    Generate beautiful, shareable quote images with anime-inspired designs. Perfect for social media, websites, and applications.
+                </p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-title">GET /v2/image</span>
+                        <button class="copy-btn" onclick="copyCode('v2-image')">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </div>
+                    <div class="code-content" id="v2-image">GET https://aniquotesapi.vercel.app/v2/image?id=42&lang=en</div>
+                </div>
+
+                <table class="param-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="param-name">id</span></td>
+                            <td>integer</td>
+                            <td><span class="param-required">Required</span></td>
+                            <td>Quote ID to generate image for</td>
+                        </tr>
+                        <tr>
+                            <td><span class="param-name">lang</span></td>
+                            <td>string</td>
+                            <td><span class="param-optional">Optional</span></td>
+                            <td>Language for the quote text</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="info-box info">
+                    <div class="info-box-title">
+                        <i class="fas fa-palette"></i>
+                        Image Features
+                    </div>
+                    <p>Generated images include beautiful backgrounds, proper typography, character names, anime titles, and watermarks. Images are returned as PNG format.</p>
+                </div>
+            </section>
+
+            <!-- Error Handling -->
+            <section class="content-section" id="error-handling">
+                <h2 class="section-title">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Error Handling
+                </h2>
+                <p class="content-text">
+                    The API uses standard HTTP status codes to indicate success or failure. All error responses include a descriptive message and credit information.
+                </p>
+
+                <table class="param-table">
+                    <thead>
+                        <tr>
+                            <th>Status Code</th>
+                            <th>Meaning</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>200</strong></td>
+                            <td>OK</td>
+                            <td>Request successful</td>
+                        </tr>
+                        <tr>
+                            <td><strong>400</strong></td>
+                            <td>Bad Request</td>
+                            <td>Invalid or missing parameters</td>
+                        </tr>
+                        <tr>
+                            <td><strong>404</strong></td>
+                            <td>Not Found</td>
+                            <td>No quotes found for the criteria</td>
+                        </tr>
+                        <tr>
+                            <td><strong>429</strong></td>
+                            <td>Too Many Requests</td>
+                            <td>Rate limit exceeded</td>
+                        </tr>
+                        <tr>
+                            <td><strong>500</strong></td>
+                            <td>Internal Server Error</td>
+                            <td>Server error occurred</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 class="subsection-title">Error Response Format</h3>
+                <div class="response-example">
+                    <div class="response-title">
+                        <i class="fas fa-times-circle"></i>
+                        Error Response Example
+                    </div>
+                    <div class="response-json">{
+  "error": "No quotes found for the specified anime",
+  "credit": "GitHub/Shineii86"
+}</div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p class="footer-text">
+                Built with ❤️ by <a href="https://telegram.me/Shineii86">Shinei Nouzen</a>
+            </p>
+            <p class="footer-text">
+                © 2025 AniQuotes API. Open source and free forever.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            const icon = document.getElementById('theme-icon');
+            icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.getElementById('theme-icon').className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+
+        // Copy code function
+        function copyCode(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const button = element.parentElement.querySelector('.copy-btn');
+                const originalText = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                button.style.background = 'var(--success)';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = 'var(--primary)';
+                }, 2000);
+            });
+        }
+
+        // Smooth scrolling for sidebar links
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Update active link
+                    document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Update active link on scroll
+        const sections = document.querySelectorAll('.content-section');
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+        function updateActiveLink() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            sidebarLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveLink);
+    </script>
+</body>
+</html>

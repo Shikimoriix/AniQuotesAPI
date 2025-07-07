@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examples - AniQuotes API Wiki</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/Shineii86/AniQuotesAPI/main/assets/LogoHD.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF5E8A;
+            --primary-dark: #E0446C;
+            --secondary: #FF7BAC;
+            --accent: #00D4FF;
+            --accent-dark: #0088CC;
+            --background: #FFFFFF;
+            --surface: #FAFAFA;
+            --surface-elevated: #FFFFFF;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+            --text-tertiary: #999999;
+            --border: #E5E5E5;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --gradient-primary: linear-gradient(135deg, #FF5E8A 0%, #FF7BAC 100%);
+            --gradient-accent: linear-gradient(135deg, #00D4FF 0%, #0088CC 100%);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        [data-theme="dark"] {
+            --primary: #FF5E8A;
+            --primary-dark: #E0446C;
+            --secondary: #FF7BAC;
+            --accent: #00D4FF;
+            --accent-dark: #0088CC;
+            --background: #0F0F0F;
+            --surface: #1A1A1A;
+            --surface-elevated: #262626;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B3B3B3;
+            --text-tertiary: #808080;
+            --border: #333333;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --shadow: 0 4px 6px -1px rgba(255, 94, 138, 0.1), 0 2px 4px -1px rgba(255, 94, 138, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(255, 94, 138, 0.1), 0 10px 10px -5px rgba(255, 94, 138, 0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--background);
+            transition: all 0.3s ease;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .navbar {
+            background: rgba(15, 15, 15, 0.95);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .nav-logo i {
+            color: var(--primary);
+            font-size: 1.75rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+            background: rgba(255, 94, 138, 0.1);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            cursor: pointer;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 1rem 4rem;
+        }
+
+        .page-header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Language Tabs */
+        .language-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .language-tab {
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            background: var(--surface-elevated);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .language-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Code Examples */
+        .example-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: var(--primary);
+        }
+
+        .example-card {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .example-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 1rem 1rem 0 0;
+        }
+
+        .example-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .example-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .code-block {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            background: var(--surface-elevated);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .code-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .copy-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.4rem;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .code-content {
+            padding: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-text a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <i class="fas fa-quote-left"></i>
+                AniQuotes Wiki
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/docs" class="nav-link">Documentation</a></li>
+                <li><a href="/api-reference" class="nav-link">API Reference</a></li>
+                <li><a href="/examples" class="nav-link active">Examples</a></li>
+                <li><a href="/contribute" class="nav-link">Contribute</a></li>
+                <li><a href="/status" class="nav-link">Status</a></li>
+            </ul>
+
+            <div class="nav-controls">
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">Code Examples</h1>
+            <p class="page-description">
+                Ready-to-use code examples in popular programming languages. Copy, paste, and start building amazing projects with AniQuotes API!
+            </p>
+        </div>
+
+        <!-- Language Tabs -->
+        <div class="language-tabs">
+            <div class="language-tab active" onclick="showLanguage('javascript')">
+                <i class="fab fa-js-square"></i> JavaScript
+            </div>
+            <div class="language-tab" onclick="showLanguage('python')">
+                <i class="fab fa-python"></i> Python
+            </div>
+            <div class="language-tab" onclick="showLanguage('php')">
+                <i class="fab fa-php"></i> PHP
+            </div>
+            <div class="language-tab" onclick="showLanguage('java')">
+                <i class="fab fa-java"></i> Java
+            </div>
+            <div class="language-tab" onclick="showLanguage('csharp')">
+                <i class="fas fa-code"></i> C#
+            </div>
+            <div class="language-tab" onclick="showLanguage('curl')">
+                <i class="fas fa-terminal"></i> cURL
+            </div>
+        </div>
+
+        <!-- JavaScript Examples -->
+        <div id="javascript" class="language-content">
+            <section class="example-section">
+                <h2 class="section-title">
+                    <i class="fab fa-js-square"></i>
+                    JavaScript Examples
+                </h2>
+
+                <div class="example-card">
+                    <h3 class="example-title">Get Random Quote (Fetch API)</h3>
+                    <p class="example-description">Simple example using modern JavaScript fetch API to get a random anime quote.</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-title">
+                                <i class="fab fa-js-square"></i>
+                                random-quote.js
+                            </div>
+                            <button class="copy-btn" onclick="copyCode('js-random')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="code-content" id="js-random">// Get a random anime quote
+async function getRandomQuote() {
+    try {
+        const response = await fetch('https://aniquotesapi.vercel.app/v1/random');
+        const quote = await response.json();
+        
+        console.log(`"${quote.quote}"`);
+        console.log(`- ${quote.character} (${quote.anime})`);
+        
+        return quote;
+    } catch (error) {
+        console.error('Error fetching quote:', error);
+    }
+}
+
+// Usage
+getRandomQuote();</div>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <h3 class="example-title">React Component</h3>
+                    <p class="example-description">A React component that displays random anime quotes with a refresh button.</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-title">
+                                <i class="fab fa-react"></i>
+                                QuoteComponent.jsx
+                            </div>
+                            <button class="copy-btn" onclick="copyCode('js-react')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="code-content" id="js-react">import React, { useState, useEffect } from 'react';
+
+const QuoteComponent = () => {
+    const [quote, setQuote] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    const fetchQuote = async () => {
+        setLoading(true);
+        try {
+            const response = await fetch('https://aniquotesapi.vercel.app/v1/random');
+            const data = await response.json();
+            setQuote(data);
+        } catch (error) {
+            console.error('Error:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchQuote();
+    }, []);
+
+    if (loading) return <div>Loading...</div>;
+
+    return (
+        <div className="quote-card">
+            <blockquote>"{quote.quote}"</blockquote>
+            <cite>- {quote.character} ({quote.anime})</cite>
+            <button onClick={fetchQuote}>New Quote</button>
+        </div>
+    );
+};
+
+export default QuoteComponent;</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Python Examples -->
+        <div id="python" class="language-content" style="display: none;">
+            <section class="example-section">
+                <h2 class="section-title">
+                    <i class="fab fa-python"></i>
+                    Python Examples
+                </h2>
+
+                <div class="example-card">
+                    <h3 class="example-title">Simple Quote Fetcher</h3>
+                    <p class="example-description">Basic Python script using requests library to get anime quotes.</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-title">
+                                <i class="fab fa-python"></i>
+                                quote_fetcher.py
+                            </div>
+                            <button class="copy-btn" onclick="copyCode('py-basic')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="code-content" id="py-basic">import requests
+import json
+
+class AnimeQuoteFetcher:
+    BASE_URL = "https://aniquotesapi.vercel.app"
+    
+    def get_random_quote(self):
+        """Get a random anime quote"""
+        try:
+            response = requests.get(f"{self.BASE_URL}/v1/random")
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.RequestException as e:
+            print(f"Error fetching quote: {e}")
+            return None
+    
+    def get_quotes_by_anime(self, anime_name):
+        """Get quotes from specific anime"""
+        try:
+            params = {"name": anime_name}
+            response = requests.get(f"{self.BASE_URL}/v1/anime", params=params)
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.RequestException as e:
+            print(f"Error fetching quotes: {e}")
+            return None
+
+# Usage
+fetcher = AnimeQuoteFetcher()
+
+# Get random quote
+quote = fetcher.get_random_quote()
+if quote:
+    print(f'"{quote["quote"]}"')
+    print(f"- {quote['character']} ({quote['anime']})")
+
+# Get quotes from Naruto
+naruto_quotes = fetcher.get_quotes_by_anime("Naruto")
+if naruto_quotes:
+    print(f"Found {len(naruto_quotes)} Naruto quotes!")</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PHP Examples -->
+        <div id="php" class="language-content" style="display: none;">
+            <section class="example-section">
+                <h2 class="section-title">
+                    <i class="fab fa-php"></i>
+                    PHP Examples
+                </h2>
+
+                <div class="example-card">
+                    <h3 class="example-title">Quote Display Class</h3>
+                    <p class="example-description">PHP class for fetching and displaying anime quotes with error handling.</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <div class="code-title">
+                                <i class="fab fa-php"></i>
+                                AnimeQuotes.php
+                            </div>
+                            <button class="copy-btn" onclick="copyCode('php-class')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="code-content" id="php-class"><?php
+
+class AnimeQuotes {
+    private $baseUrl = 'https://aniquotesapi.vercel.app';
+    
+    public function getRandomQuote() {
+        $url = $this->baseUrl . '/v1/random';
+        return $this->makeRequest($url);
+    }
+    
+    public function getQuotesByAnime($animeName) {
+        $url = $this->baseUrl . '/v1/anime?name=' . urlencode($animeName);
+        return $this->makeRequest($url);
+    }
+    
+    public function getQuotesByCharacter($characterName) {
+        $url = $this->baseUrl . '/v1/character?name=' . urlencode($characterName);
+        return $this->makeRequest($url);
+    }
+    
+    private function makeRequest($url) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        
+        if ($httpCode === 200) {
+            return json_decode($response, true);
+        }
+        
+        return false;
+    }
+    
+    public function displayQuote($quote) {
+        if (!$quote) {
+            return '<p>No quote available.</p>';
+        }
+        
+        return sprintf(
+            '<blockquote>"%s"</blockquote><cite>- %s (%s)</cite>',
+            htmlspecialchars($quote['quote']),
+            htmlspecialchars($quote['character']),
+            htmlspecialchars($quote['anime'])
+        );
+    }
+}
+
+// Usage
+$quotes = new AnimeQuotes();
+$randomQuote = $quotes->getRandomQuote();
+
+echo $quotes->displayQuote($randomQuote);
+
+?></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Add other language examples here in similar format -->
+        <!-- Java, C#, cURL examples would follow the same structure -->
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p class="footer-text">
+                Built with ❤️ by <a href="https://telegram.me/Shineii86">Shinei Nouzen</a>
+            </p>
+            <p class="footer-text">
+                © 2025 AniQuotes API. Open source and free forever.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            const icon = document.getElementById('theme-icon');
+            icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.getElementById('theme-icon').className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+
+        // Language switching
+        function showLanguage(language) {
+            // Hide all language content
+            document.querySelectorAll('.language-content').forEach(content => {
+                content.style.display = 'none';
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.language-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected language content
+            const selectedContent = document.getElementById(language);
+            if (selectedContent) {
+                selectedContent.style.display = 'block';
+            }
+            
+            // Add active class to selected tab
+            event.target.classList.add('active');
+        }
+
+        // Copy code function
+        function copyCode(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const button = element.parentElement.querySelector('.copy-btn');
+                const originalText = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                button.style.background = 'var(--success)';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = 'var(--primary)';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

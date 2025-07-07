@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contribute - AniQuotes API Wiki</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/Shineii86/AniQuotesAPI/main/assets/LogoHD.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF5E8A;
+            --primary-dark: #E0446C;
+            --secondary: #FF7BAC;
+            --accent: #00D4FF;
+            --accent-dark: #0088CC;
+            --background: #FFFFFF;
+            --surface: #FAFAFA;
+            --surface-elevated: #FFFFFF;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+            --text-tertiary: #999999;
+            --border: #E5E5E5;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --gradient-primary: linear-gradient(135deg, #FF5E8A 0%, #FF7BAC 100%);
+            --gradient-accent: linear-gradient(135deg, #00D4FF 0%, #0088CC 100%);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        [data-theme="dark"] {
+            --primary: #FF5E8A;
+            --primary-dark: #E0446C;
+            --secondary: #FF7BAC;
+            --accent: #00D4FF;
+            --accent-dark: #0088CC;
+            --background: #0F0F0F;
+            --surface: #1A1A1A;
+            --surface-elevated: #262626;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B3B3B3;
+            --text-tertiary: #808080;
+            --border: #333333;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --shadow: 0 4px 6px -1px rgba(255, 94, 138, 0.1), 0 2px 4px -1px rgba(255, 94, 138, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(255, 94, 138, 0.1), 0 10px 10px -5px rgba(255, 94, 138, 0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--background);
+            transition: all 0.3s ease;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .navbar {
+            background: rgba(15, 15, 15, 0.95);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .nav-logo i {
+            color: var(--primary);
+            font-size: 1.75rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+            background: rgba(255, 94, 138, 0.1);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            cursor: pointer;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            background: var(--gradient-primary);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,0 1000,300 1000,1000 0,700"/></svg>');
+            background-size: cover;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-cta {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 25px 35px -5px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 1rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: var(--primary);
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        /* Contribution Cards */
+        .contribution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contribution-card {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contribution-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .contribution-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .contribution-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 1rem;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .contribution-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .contribution-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .contribution-action {
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contribution-action:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        /* Steps Section */
+        .steps-container {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .step {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .step-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Code Block */
+        .code-block {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .code-title {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .copy-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.4rem;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .code-content {
+            padding: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-text a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .contribution-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <i class="fas fa-quote-left"></i>
+                AniQuotes Wiki
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/docs" class="nav-link">Documentation</a></li>
+                <li><a href="/api-reference" class="nav-link">API Reference</a></li>
+                <li><a href="/examples" class="nav-link">Examples</a></li>
+                <li><a href="/contribute" class="nav-link active">Contribute</a></li>
+                <li><a href="/status" class="nav-link">Status</a></li>
+            </ul>
+
+            <div class="nav-controls">
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1 class="hero-title">Join Our Community</h1>
+            <p class="hero-subtitle">
+                Help us make AniQuotes API even better! Contribute quotes, translations, code, or documentation to support the anime community worldwide.
+            </p>
+            
+            <div class="hero-cta">
+                <a href="https://github.com/Shineii86/AniQuotesAPI" target="_blank" class="btn btn-primary">
+                    <i class="fab fa-github"></i>
+                    View on GitHub
+                </a>
+                <a href="#ways-to-contribute" class="btn btn-secondary">
+                    <i class="fas fa-arrow-down"></i>
+                    Learn How to Help
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Ways to Contribute -->
+        <section class="section" id="ways-to-contribute">
+            <h2 class="section-title">
+                <i class="fas fa-hands-helping"></i>
+                Ways to Contribute
+            </h2>
+            <p class="section-description">
+                There are many ways to contribute to AniQuotes API, whether you're a developer, translator, or anime enthusiast. Every contribution helps make the API better for everyone!
+            </p>
+
+            <div class="contribution-grid">
+                <div class="contribution-card">
+                    <div class="contribution-icon">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <h3 class="contribution-title">Add New Quotes</h3>
+                    <p class="contribution-description">
+                        Contribute your favorite anime quotes from any series. Help expand our collection and share the wisdom of anime characters with the world.
+                    </p>
+                    <a href="#adding-quotes" class="contribution-action">
+                        <i class="fas fa-plus"></i>
+                        Add Quotes
+                    </a>
+                </div>
+
+                <div class="contribution-card">
+                    <div class="contribution-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3 class="contribution-title">Translate Quotes</h3>
+                    <p class="contribution-description">
+                        Help make anime quotes accessible to more people by translating existing quotes into different languages.
+                    </p>
+                    <a href="#translations" class="contribution-action">
+                        <i class="fas fa-globe"></i>
+                        Translate
+                    </a>
+                </div>
+
+                <div class="contribution-card">
+                    <div class="contribution-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="contribution-title">Improve Code</h3>
+                    <p class="contribution-description">
+                        Enhance the API functionality, fix bugs, add new features, or improve performance. Every code contribution matters!
+                    </p>
+                    <a href="#code-contributions" class="contribution-action">
+                        <i class="fas fa-laptop-code"></i>
+                        Code
+                    </a>
+                </div>
+
+                <div class="contribution-card">
+                    <div class="contribution-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="contribution-title">Documentation</h3>
+                    <p class="contribution-description">
+                        Help improve documentation, write tutorials, create examples, or enhance the user experience for developers.
+                    </p>
+                    <a href="#documentation" class="contribution-action">
+                        <i class="fas fa-edit"></i>
+                        Document
+                    </a>
+                </div>
+
+                <div class="contribution-card">
+                    <div class="contribution-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3 class="contribution-title">Report Issues</h3>
+                    <p class="contribution-description">
+                        Found a bug or have a feature request? Report issues to help us identify and fix problems quickly.
+                    </p>
+                    <a href="https://github.com/Shineii86/AniQuotesAPI/issues" target="_blank" class="contribution-action">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Report
+                    </a>
+                </div>
+
+                <div class="contribution-card">
+                    <div class="contribution-icon">
+                        <i class="fas fa-share"></i>
+                    </div>
+                    <h3 class="contribution-title">Spread the Word</h3>
+                    <p class="contribution-description">
+                        Share AniQuotes API with other developers and anime fans. Help us grow the community!
+                    </p>
+                    <a href="https://github.com/Shineii86/AniQuotesAPI" target="_blank" class="contribution-action">
+                        <i class="fas fa-star"></i>
+                        Star on GitHub
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Adding Quotes -->
+        <section class="section" id="adding-quotes">
+            <h2 class="section-title">
+                <i class="fas fa-plus-circle"></i>
+                Adding New Quotes
+            </h2>
+            <p class="section-description">
+                Follow these simple steps to add new anime quotes to our collection:
+            </p>
+
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Fork the Repository</h3>
+                        <p class="step-description">
+                            Fork the AniQuotes API repository on GitHub to create your own copy where you can make changes.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Locate the Data File</h3>
+                        <p class="step-description">
+                            Navigate to the <code>data/quotes.json</code> file for English quotes, or the appropriate language file in <code>data/languages/</code>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Add Your Quote</h3>
+                        <p class="step-description">
+                            Add your quote following the exact JSON structure shown below:
+                        </p>
+                        
+                        <div class="code-block">
+                            <div class="code-header">
+                                <div class="code-title">Quote JSON Structure</div>
+                                <button class="copy-btn" onclick="copyCode('quote-structure')">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <div class="code-content" id="quote-structure">{
+  "id": 9999,
+  "quote": "Your awesome anime quote here",
+  "anime": "Anime Title",
+  "character": "Character Name",
+  "language": "en"
+}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Submit Pull Request</h3>
+                        <p class="step-description">
+                            Create a pull request with a clear description of the quotes you've added. Include the anime series and number of quotes added.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Getting Started with Development -->
+        <section class="section" id="code-contributions">
+            <h2 class="section-title">
+                <i class="fas fa-laptop-code"></i>
+                Development Setup
+            </h2>
+            <p class="section-description">
+                Ready to contribute code? Here's how to set up the development environment:
+            </p>
+
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="code-title">Setup Commands</div>
+                    <button class="copy-btn" onclick="copyCode('setup-commands')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                <div class="code-content" id="setup-commands"># Clone your fork
+git clone https://github.com/YOUR_USERNAME/AniQuotesAPI.git
+cd AniQuotesAPI
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run start
+
+# Run tests
+npm test</div>
+            </div>
+
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Create a Feature Branch</h3>
+                        <p class="step-description">
+                            Always create a new branch for your feature or bug fix: <code>git checkout -b feature/your-feature-name</code>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Make Your Changes</h3>
+                        <p class="step-description">
+                            Write clean, well-documented code. Follow the existing code style and add tests for new functionality.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Test Your Changes</h3>
+                        <p class="step-description">
+                            Run <code>npm test</code> to ensure all tests pass and your changes don't break existing functionality.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Submit Pull Request</h3>
+                        <p class="step-description">
+                            Push your changes and create a pull request with a detailed description of what you've implemented.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Guidelines -->
+        <section class="section">
+            <h2 class="section-title">
+                <i class="fas fa-heart"></i>
+                Community Guidelines
+            </h2>
+            <p class="section-description">
+                We strive to maintain a welcoming and inclusive community. Please follow these guidelines:
+            </p>
+
+            <div class="contribution-grid">
+                <div class="contribution-card">
+                    <div class="contribution-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="contribution-title">Quality Standards</h3>
+                    <p class="contribution-description">
+                        Ensure quotes are accurate, properly attributed, and from legitimate anime sources. Avoid duplicates and maintain high quality standards.
+                    </p>
+                </div>
+
+                <div class="contribution-card">
+                    <div class="contribution-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="contribution-title">Be Respectful</h3>
+                    <p class="contribution-description">
+                        Treat all community members with respect. Be constructive in feedback and discussions. We're all here to improve the API together.
+                    </p>
+                </div>
+
+                <div class="contribution-card">
+                    <div class="contribution-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="contribution-title">Content Guidelines</h3>
+                    <p class="contribution-description">
+                        Keep content appropriate and family-friendly. Avoid quotes with explicit content or offensive language.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p class="footer-text">
+                Built with ❤️ by <a href="https://telegram.me/Shineii86">Shinei Nouzen</a>
+            </p>
+            <p class="footer-text">
+                © 2025 AniQuotes API. Open source and free forever.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            const icon = document.getElementById('theme-icon');
+            icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.getElementById('theme-icon').className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+
+        // Copy code function
+        function copyCode(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const button = element.parentElement.querySelector('.copy-btn');
+                const originalText = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                button.style.background = 'var(--success)';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = 'var(--primary)';
+                }, 2000);
+            });
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
