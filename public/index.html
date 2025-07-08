@@ -426,10 +426,25 @@
         }
 
         .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-left {
+            flex: 1;
+        }
+
+        .footer-center {
+            flex: 1;
             text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .footer-text {
@@ -447,68 +462,79 @@
             text-decoration: underline;
         }
 
-        .footer-links {
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .footer-left,
+            .footer-center {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .footer-links {
+                justify-content: center;
+            }
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: var(--surface-elevated);
+            border-bottom: 1px solid var(--border);
+            z-index: 999;
+            padding: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.show {
+            transform: translateY(0);
+        }
+
+        .mobile-menu ul {
+            list-style: none;
             display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
+            flex-direction: column;
+            gap: 0.5rem;
         }
 
-        .footer-link {
-            color: var(--text-secondary);
+        .mobile-menu ul li a {
+            display: block;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
         }
 
-        .footer-link:hover {
+        .mobile-menu ul li a:hover,
+        .mobile-menu ul li a.active {
+            background: rgba(255, 94, 138, 0.1);
             color: var(--primary);
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
 
+        @media (max-width: 768px) {
             .mobile-menu-btn {
                 display: block;
-            }
-
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.2rem;
-            }
-
-            .hero-cta {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: 100%;
-                max-width: 300px;
-                justify-content: center;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .quick-start {
-                padding: 2rem;
-            }
-
-            .footer-links {
-                flex-direction: column;
-                gap: 1rem;
             }
         }
 
@@ -544,7 +570,7 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Mobile Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <a href="/" class="nav-logo">
@@ -552,25 +578,28 @@
                 AniQuotes Wiki
             </a>
             
-            <ul class="nav-menu">
-                <li><a href="/" class="nav-link active">Home</a></li>
-                <li><a href="/docs" class="nav-link">Documentation</a></li>
-                <li><a href="/api-reference" class="nav-link">API Reference</a></li>
-                <li><a href="/examples" class="nav-link">Examples</a></li>
-                <li><a href="/contribute" class="nav-link">Contribute</a></li>
-                <li><a href="/status" class="nav-link">Status</a></li>
-            </ul>
-
             <div class="nav-controls">
                 <button class="theme-toggle" onclick="toggleTheme()">
                     <i class="fas fa-moon" id="theme-icon"></i>
                 </button>
-                <button class="mobile-menu-btn">
+                <button class="mobile-menu-btn" id="mobile-menu-toggle">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <ul>
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/docs">Documentation</a></li>
+            <li><a href="/api-reference">API Reference</a></li>
+            <li><a href="/examples">Examples</a></li>
+            <li><a href="/contribute">Contribute</a></li>
+            <li><a href="/status">Status</a></li>
+        </ul>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -764,22 +793,26 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
-            <div class="footer-links">
-                <a href="/docs" class="footer-link">Documentation</a>
-                <a href="/api-reference" class="footer-link">API Reference</a>
-                <a href="/examples" class="footer-link">Examples</a>
-                <a href="/contribute" class="footer-link">Contribute</a>
-                <a href="/status" class="footer-link">Status</a>
-                <a href="/privacy" class="footer-link">Privacy</a>
-                <a href="/terms" class="footer-link">Terms</a>
-                <a href="https://github.com/Shineii86/AniQuotesAPI" class="footer-link">GitHub</a>
+            <div class="footer-left">
+                <div class="footer-links">
+                    <a href="/docs" class="footer-link">Documentation</a>
+                    <a href="/api-reference" class="footer-link">API Reference</a>
+                    <a href="/examples" class="footer-link">Examples</a>
+                    <a href="/contribute" class="footer-link">Contribute</a>
+                    <a href="/status" class="footer-link">Status</a>
+                    <a href="/privacy" class="footer-link">Privacy</a>
+                    <a href="/terms" class="footer-link">Terms</a>
+                    <a href="https://github.com/Shineii86/AniQuotesAPI" class="footer-link">GitHub</a>
+                </div>
             </div>
-            <p class="footer-text">
-                Built with ❤️ by <a href="https://telegram.me/Shineii86">Shinei Nouzen</a>
-            </p>
-            <p class="footer-text">
-                © 2025 AniQuotes API. Open source and free forever.
-            </p>
+            <div class="footer-center">
+                <p class="footer-text">
+                    Built with ❤️ by <a href="https://telegram.me/Shineii86">Shinei Nouzen</a>
+                </p>
+                <p class="footer-text">
+                    © 2025 AniQuotes API. Open source and free forever.
+                </p>
+            </div>
         </div>
     </footer>
 
@@ -853,6 +886,26 @@
             }
             lastScrollY = window.scrollY;
         });
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuToggle && mobileMenu) {
+            mobileMenuToggle.addEventListener('click', function() {
+                mobileMenu.classList.toggle('show');
+            });
+            // Optional: Hide menu when clicking outside or on a link
+            document.addEventListener('click', function(e) {
+                if (!mobileMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                    mobileMenu.classList.remove('show');
+                }
+            });
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('show');
+                });
+            });
+        }
     </script>
 </body>
 </html>
